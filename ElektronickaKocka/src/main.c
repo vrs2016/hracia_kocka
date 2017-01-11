@@ -32,80 +32,47 @@
 #include "elkocka.h"
 
 
-int main(void)
-{
-  int i = 0;
-  uint16_t biela = decodeRgbValue(31, 31, 31);
-  uint16_t cierna = decodeRgbValue(0, 0, 0);
-  uint16_t cervena = decodeRgbValue(31, 0, 0);
-  uint16_t zelena = decodeRgbValue(0, 31, 0);
-  uint16_t modra = decodeRgbValue(0, 0, 31);
+int main(void){
+	uint16_t biela = decodeRgbValue(31, 31, 31);
+	uint16_t cierna = decodeRgbValue(0, 0, 0);
+	//uint16_t cervena = decodeRgbValue(31, 0, 0);
+	uint16_t zelena = decodeRgbValue(0, 31, 0);
+	//uint16_t modra = decodeRgbValue(0, 0, 31);
 
-  initSPI2();
-  initCD_Pin();
-  initCS_Pin();
-  initRES_Pin();
-  //ssd1306_init();
+	initSPI2();
+	initCD_Pin();
+	initCS_Pin();
+	initRES_Pin();
+	//ssd1306_init();
 
-  	lcdInitialise(LCD_ORIENTATION0);
+	lcdInitialise(LCD_ORIENTATION0);
+	zmazDisplej(cierna);
+	lcdMriezka3x3(54, 93, 6, biela, cierna);
 
-  	//lcdClearDisplay(cierna);
-  	zmazDisplej(cierna);
-  	lcdMriezka3x3(54, 93, 6, biela, cierna);
+	//hod kockou na zaklade akcelerometra
+	lcdPutS("Hod kockou", lcdTextX(1), lcdTextY(9), biela, cierna);
+	lcdRectangle(45, 85, 83, 122, biela);
+	////Mriezka pre stvorceky
+	//lcdMriezka3x3(51, 90, 3, zelena, cierna);
 
-  	/*lcdLine(0, 0, 127, 127, decodeRgbValue(31, 31, 31));
-  	lcdLine(0, 127, 127, 0, decodeRgbValue(31, 31, 31));
-  	lcdCircle(64, 64, 32, decodeRgbValue(31, 0, 0));
-  	lcdCircle(64, 64, 40, decodeRgbValue(0, 31, 0));
-  	lcdCircle(64, 64, 48, decodeRgbValue(0, 0, 31));*/
+	//Mriezka pre kruzky
+	lcdMriezka3x3(54, 93, 6, zelena, cierna);
 
-  	//lcdPutS("Hello World!", lcdTextX(4), lcdTextY(0), decodeRgbValue(0, 0, 0), decodeRgbValue(31, 31, 31));
+	//nahodny generator
+	lcdPutS("Nahodny generator", lcdTextX(1), lcdTextY(1), biela, cierna);
+	lcdRectangle(45, 23, 83, 60, biela);
 
-  	lcdPutS("The quick brown fox jumped over the lazy dog 0123456789", lcdTextX(1), lcdTextY(2), decodeRgbValue(255, 255, 255), decodeRgbValue(0, 0, 0));
+	while(1){
+		for(int i = 0; i < 6; i++){
+			////Mriezka pre stvorceky
+			//lcdMriezka3x3(51, 28, i+1, biela, cierna);
 
-  		//lcdPutS("Test", 23, 17, 0xFFFF, 0);
-
-
-  	//lcdFilledRectangle(1, 64, 128, 128, decodeRgbValue(0, 0, 0));
-  		//lcdRectangle(2, 65, 127, 127, decodeRgbValue(31, 31, 31));
-
-	// Run the LCD test
-	uint8_t ballX = 70, ballY = 70;
-	int8_t ballSpeed = 1;
-	int8_t xDir = ballSpeed, yDir = ballSpeed;
-
-  /* Infinite loop */
-  while (1)
-  {
-	  // Delete the ball
-	  		//lcdFilledRectangle(ballX-2, ballY-1, ballX+2, ballY+2, decodeRgbValue(0, 0, 0));
-	  		//lcdLine(1, 1, 128, 128, decodeRgbValue(0, 0, 25));
-	  		//lcdPutS("o", ballX, ballY, 0, 0);
-
-	  		// Delete the bat
-	  		//lcdFilledRectangle(ballX-4, 124, ballX+4, 126, decodeRgbValue(0, 0, 0));
-
-	  		// Move the ball
-	  		ballX += xDir;
-	  		ballY += yDir;
-
-	  		// Range check
-	  		if (ballX > 120) xDir = -ballSpeed;
-	  		if (ballX < 8) xDir = ballSpeed;
-
-	  		if (ballY > 120) yDir = -ballSpeed;
-	  		if (ballY < 70) yDir = ballSpeed;
-
-	  		// Plot the ball
-	  		//lcdFilledRectangle(ballX-2, ballY-1, ballX+2, ballY+2, decodeRgbValue(31, 31, 31));
-
-	  		//lcdPutS("o", ballX, ballY, 0xFFFF, 0);
-
-	  		// Plot the bat
-	  		//lcdFilledRectangle(ballX-4, 124, ballX+4, 126, decodeRgbValue(31, 0, 31));
-
-	  		//lcdPutS("Hello World!", lcdTextX(4), lcdTextY(0), decodeRgbValue(0, 0, 0), decodeRgbValue(31, 31, 31));
-	  		Delay(10);
-  }
-  return 0;
+			//Mriezka pre kruzky
+			lcdMriezka3x3(54, 31, i+1, biela, cierna);
+			for(int j=0;j<150;j++){
+				Delay(1000);
+			}
+		}
+	}
+	return 0;
 }
