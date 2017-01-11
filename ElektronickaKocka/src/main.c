@@ -22,8 +22,9 @@
 *****************************************************************************
 */
 
-/* Includes */
 #include <stddef.h>
+#include <math.h>
+#include <stdio.h>
 #include "stm32l1xx.h"
 
 #include "spi.h"
@@ -43,6 +44,7 @@ int main(void){
 	initCD_Pin();
 	initCS_Pin();
 	initRES_Pin();
+	USART_init();
 	//ssd1306_init();
 
 	lcdInitialise(LCD_ORIENTATION0);
@@ -63,7 +65,7 @@ int main(void){
 	lcdRectangle(45, 23, 83, 60, biela);
 
 	while(1){
-		for(int i = 0; i < 6; i++){
+		for(int i=0;i<6;i++){
 			////Mriezka pre stvorceky
 			//lcdMriezka3x3(51, 28, i+1, biela, cierna);
 
@@ -71,6 +73,8 @@ int main(void){
 			lcdMriezka3x3(54, 31, i+1, biela, cierna);
 			for(int j=0;j<150;j++){
 				Delay(1000);
+				// pomocna funkcia na zobrazenie informacii odoslanim na seriovu linku
+				SendUSART2("Test\n\r");
 			}
 		}
 	}
