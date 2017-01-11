@@ -53,7 +53,7 @@ void initUSART2(void){
 }
 
 // posli string po seriovej zbernici USART2
-void SendUSART2(char *s){
+void sendUSART2(char *s){
   // kym sme neposlali vsetky znaky
   while(*s){
 	// pockaj kym mozes vysielat
@@ -63,7 +63,7 @@ void SendUSART2(char *s){
   }
 }
 
-void zmazDisplej(uint16_t colour){
+void clearDisplay(uint16_t colour){
 	lcdFilledRectangle(0,0,129,130,colour);
 }
 

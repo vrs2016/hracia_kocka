@@ -4,6 +4,10 @@ c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/
                               src\startup_stm32l1xx_hd.o (__libc_init_array)
 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-strlen.o)
                               src\ili9163.o (strlen)
+c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+                              src\mpu6050.o (__aeabi_fadd)
+c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+                              src\mpu6050.o (__aeabi_fdiv)
 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
                               src\mcu.o (__aeabi_uldivmod)
 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_udivmoddi4.o)
@@ -1444,6 +1448,30 @@ Discarded input sections
                 0x00000000       0x70 src\mcu.o
  .text.keypad_getStatus
                 0x00000000      0x10c src\mcu.o
+ .text          0x00000000        0x0 src\mpu6050.o
+ .data          0x00000000        0x0 src\mpu6050.o
+ .bss           0x00000000        0x0 src\mpu6050.o
+ .text.initMPU6050
+                0x00000000      0x184 src\mpu6050.o
+ .text.nacitajMPU6050_Akcelerometer
+                0x00000000       0x5c src\mpu6050.o
+ .text.nacitajMPU6050_Gyroskop
+                0x00000000       0x5c src\mpu6050.o
+ .text.nacitajMPU6050_Teplotu
+                0x00000000       0x64 src\mpu6050.o
+ .text.nacitajMPU6050_Vsetko
+                0x00000000       0xd0 src\mpu6050.o
+ .debug_info    0x00000000      0x3f0 src\mpu6050.o
+ .debug_abbrev  0x00000000       0xd8 src\mpu6050.o
+ .debug_aranges
+                0x00000000       0x40 src\mpu6050.o
+ .debug_ranges  0x00000000       0x30 src\mpu6050.o
+ .debug_line    0x00000000      0x1e6 src\mpu6050.o
+ .debug_str     0x00000000      0x475 src\mpu6050.o
+ .comment       0x00000000       0x7f src\mpu6050.o
+ .debug_frame   0x00000000       0xc4 src\mpu6050.o
+ .ARM.attributes
+                0x00000000       0x33 src\mpu6050.o
  .text          0x00000000        0x0 src\spi.o
  .data          0x00000000        0x0 src\spi.o
  .bss           0x00000000        0x0 src\spi.o
@@ -1531,6 +1559,16 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
  .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-strlen.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-strlen.o)
+ .text          0x00000000      0x21c c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x00000000       0x1d c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+ .text          0x00000000      0x2a0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x00000000       0x1d c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
  .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_udivmoddi4.o)
@@ -1607,6 +1645,7 @@ LOAD src\i2c.o
 LOAD src\ili9163.o
 LOAD src\main.o
 LOAD src\mcu.o
+LOAD src\mpu6050.o
 LOAD src\spi.o
 LOAD src\ssd1306.o
 LOAD src\startup_stm32l1xx_hd.o
@@ -1709,12 +1748,12 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib
  .text.initUSART2
                 0x08000e30       0xa8 src\elkocka.o
                 0x08000e30                initUSART2
- .text.SendUSART2
+ .text.sendUSART2
                 0x08000ed8       0x40 src\elkocka.o
-                0x08000ed8                SendUSART2
- .text.zmazDisplej
+                0x08000ed8                sendUSART2
+ .text.clearDisplay
                 0x08000f18       0x24 src\elkocka.o
-                0x08000f18                zmazDisplej
+                0x08000f18                clearDisplay
  .text.lcdFilledCircle
                 0x08000f3c      0x1cc src\elkocka.o
                 0x08000f3c                lcdFilledCircle
@@ -2193,7 +2232,7 @@ OUTPUT(ElektronickaKocka.elf elf32-littlearm)
  .debug_line    0x000038b7      0x1e7 src\stm32l1xx_it.o
  .debug_line    0x00003a9e      0x21a src\system_stm32l1xx.o
 
-.debug_str      0x00000000     0x2e17
+.debug_str      0x00000000     0x2e18
  .debug_str     0x00000000      0x4bb Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_gpio.o
                                 0x511 (size before relaxing)
  .debug_str     0x000004bb      0x487 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_i2c.o
@@ -2208,23 +2247,23 @@ OUTPUT(ElektronickaKocka.elf elf32-littlearm)
                                 0x6d5 (size before relaxing)
  .debug_str     0x00001f6c       0xa0 src\ads1100.o
                                 0x19a (size before relaxing)
- .debug_str     0x0000200c       0xcd src\elkocka.o
-                                0x4fc (size before relaxing)
- .debug_str     0x000020d9      0x1e0 src\i2c.o
+ .debug_str     0x0000200c       0xce src\elkocka.o
+                                0x4fd (size before relaxing)
+ .debug_str     0x000020da      0x1e0 src\i2c.o
                                 0x691 (size before relaxing)
- .debug_str     0x000022b9      0x170 src\ili9163.o
+ .debug_str     0x000022ba      0x170 src\ili9163.o
                                 0x333 (size before relaxing)
- .debug_str     0x00002429       0x2d src\main.o
+ .debug_str     0x0000242a       0x2d src\main.o
                                 0x1d9 (size before relaxing)
- .debug_str     0x00002456      0x66d src\mcu.o
+ .debug_str     0x00002457      0x66d src\mcu.o
                                 0xb29 (size before relaxing)
- .debug_str     0x00002ac3       0xa6 src\spi.o
+ .debug_str     0x00002ac4       0xa6 src\spi.o
                                 0x513 (size before relaxing)
- .debug_str     0x00002b69      0x116 src\ssd1306.o
+ .debug_str     0x00002b6a      0x116 src\ssd1306.o
                                 0x2c2 (size before relaxing)
- .debug_str     0x00002c7f       0xa6 src\stm32l1xx_it.o
+ .debug_str     0x00002c80       0xa6 src\stm32l1xx_it.o
                                 0x221 (size before relaxing)
- .debug_str     0x00002d25       0xf2 src\system_stm32l1xx.o
+ .debug_str     0x00002d26       0xf2 src\system_stm32l1xx.o
                                 0x380 (size before relaxing)
 
 .comment        0x00000000       0x7e
@@ -2827,8 +2866,6 @@ SYSCFG_RISwitchControlModeCmd                     Libraries\STM32L1xx_StdPeriph_
 SYSCFG_RITIMInputCaptureConfig                    Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_syscfg.o
 SYSCFG_RITIMSelect                                Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_syscfg.o
 SYSCFG_USBPuCmd                                   Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_syscfg.o
-SendUSART2                                        src\elkocka.o
-                                                  src\main.o
 Set_Column_Address                                src\ssd1306.o
 Set_Contrast_Control_Register                     src\ssd1306.o
 Set_Page_Address                                  src\ssd1306.o
@@ -2990,20 +3027,40 @@ WWDG_SetWindowValue                               Libraries\STM32L1xx_StdPeriph_
 Write_Data                                        src\ssd1306.o
 Write_Instruction                                 src\ssd1306.o
 Write_number                                      src\ssd1306.o
+__addsf3                                          c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__aeabi_fadd                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+                                                  src\mpu6050.o
+__aeabi_fdiv                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+                                                  src\mpu6050.o
+__aeabi_fmul                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
+__aeabi_frsub                                     c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__aeabi_fsub                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__aeabi_i2f                                       c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+                                                  src\mpu6050.o
 __aeabi_idiv0                                     c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_dvmd_tls.o)
+__aeabi_l2f                                       c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
 __aeabi_ldiv0                                     c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_dvmd_tls.o)
                                                   c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
+__aeabi_ui2f                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__aeabi_ul2f                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
 __aeabi_uldivmod                                  c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
                                                   src\mcu.o
 __deregister_frame_info                           c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m/crtbegin.o
+__divsf3                                          c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
 __dso_handle                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m/crtbegin.o
+__floatdisf                                       c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__floatsisf                                       c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__floatundisf                                     c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
+__floatunsisf                                     c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
 __init_array_end                                  c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
 __init_array_start                                c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
 __libc_init_array                                 c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
                                                   src\startup_stm32l1xx_hd.o
+__mulsf3                                          c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_muldivsf3.o)
 __preinit_array_end                               c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
 __preinit_array_start                             c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7-m\libc.a(lib_a-init.o)
 __register_frame_info                             c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m/crtbegin.o
+__subsf3                                          c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_arm_addsubsf3.o)
 __udivmoddi4                                      c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_udivmoddi4.o)
                                                   c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m\libgcc.a(_aeabi_uldivmod.o)
 _ebss                                             src\startup_stm32l1xx_hd.o
@@ -3026,6 +3083,8 @@ cd_reset                                          src\spi.o
 cd_set                                            src\spi.o
                                                   src\ssd1306.o
                                                   src\ili9163.o
+clearDisplay                                      src\elkocka.o
+                                                  src\main.o
 decodeRgbValue                                    src\ili9163.o
                                                   src\main.o
 delay_us                                          src\mcu.o
@@ -3056,6 +3115,7 @@ initCS_Pin                                        src\spi.o
                                                   src\main.o
 initI2C1                                          src\i2c.o
                                                   src\main.o
+initMPU6050                                       src\mpu6050.o
 initRES_Pin                                       src\spi.o
                                                   src\main.o
 initSPI2                                          src\spi.o
@@ -3092,12 +3152,18 @@ lcdWriteData                                      src\ili9163.o
 lcdWriteParameter                                 src\ili9163.o
 main                                              src\main.o
                                                   src\startup_stm32l1xx_hd.o
+nacitajMPU6050_Akcelerometer                      src\mpu6050.o
+nacitajMPU6050_Gyroskop                           src\mpu6050.o
+nacitajMPU6050_Teplotu                            src\mpu6050.o
+nacitajMPU6050_Vsetko                             src\mpu6050.o
 num                                               src\ssd1306.o
 printf                                            src\tiny_printf.o
 puts                                              src\tiny_printf.o
 readArrayI2C1                                     src\i2c.o
+                                                  src\mpu6050.o
 readArrayWithoutRegisterAddressI2C1               src\i2c.o
 readByteI2C1                                      src\i2c.o
+                                                  src\mpu6050.o
 readDWordI2C1                                     src\i2c.o
 readDataADS1100                                   src\ads1100.o
 readWordI2C1                                      src\i2c.o
@@ -3110,6 +3176,8 @@ res_reset                                         src\spi.o
 res_set                                           src\spi.o
                                                   src\ssd1306.o
                                                   src\ili9163.o
+sendUSART2                                        src\elkocka.o
+                                                  src\main.o
 siprintf                                          src\tiny_printf.o
 sprintf                                           src\tiny_printf.o
 ssd1306_init                                      src\ssd1306.o
@@ -3121,5 +3189,4 @@ ts_formatstring                                   src\tiny_printf.o
 ts_itoa                                           src\tiny_printf.o
 writeArrayI2C1                                    src\i2c.o
 writeByteI2C1                                     src\i2c.o
-zmazDisplej                                       src\elkocka.o
-                                                  src\main.o
+                                                  src\mpu6050.o

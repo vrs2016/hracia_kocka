@@ -33,6 +33,7 @@
 #include "elkocka.h"
 #include "ads1100.h"
 #include "i2c.h"
+#include "mpu6050.h"
 
 
 int main(void){
@@ -55,7 +56,7 @@ int main(void){
 	//ssd1306_init();
 
 	lcdInitialise(LCD_ORIENTATION0);
-	zmazDisplej(cierna);
+	clearDisplay(cierna);
 	lcdMriezka3x3(54, 93, 6, biela, cierna);
 
 	//hod kockou na zaklade akcelerometra
@@ -82,7 +83,7 @@ int main(void){
 			for(int j=0;j<150;j++){
 				Delay(1000);
 				// pomocna funkcia na zobrazenie informacii odoslanim na seriovu linku
-				SendUSART2("Test\n\r");
+				sendUSART2("Test\n\r");
 			}
 		}
 	}
