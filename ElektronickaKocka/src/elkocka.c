@@ -9,6 +9,10 @@
 #include "ili9163.h"
 
 
+void zmazDisplej(uint16_t colour){
+	lcdFilledRectangle(0,0,129,130,colour);
+}
+
 void lcdFilledCircle(int16_t xCentre, int16_t yCentre, int16_t radius, uint16_t colour)
 {
 	int16_t x = 0, y = radius;
