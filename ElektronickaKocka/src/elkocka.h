@@ -11,7 +11,7 @@
 /*** Definicie funkcii ***/
 //----------------------------
 // funkcia na inicializaciu USART
-void USART_init(void);
+void initUSART2(void);
 // funkcia na zmazanie displeja
 void zmazDisplej(uint16_t colour);
 // funkcia na vykreslenie vyplneneho kruhu na displeji

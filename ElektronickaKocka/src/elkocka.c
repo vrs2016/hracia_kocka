@@ -11,7 +11,7 @@
 
 
 // inicializacia pre USART
-void USART_init(void){
+void initUSART2(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
 

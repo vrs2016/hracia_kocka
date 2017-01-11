@@ -25,12 +25,14 @@
 #include <stddef.h>
 #include <math.h>
 #include <stdio.h>
-#include "stm32l1xx.h"
 
+#include "stm32l1xx.h"
 #include "spi.h"
 #include "ssd1306.h"
 #include "ili9163.h"
 #include "elkocka.h"
+#include "ads1100.h"
+#include "i2c.h"
 
 
 int main(void){
@@ -39,12 +41,17 @@ int main(void){
 	//uint16_t cervena = decodeRgbValue(31, 0, 0);
 	uint16_t zelena = decodeRgbValue(0, 31, 0);
 	//uint16_t modra = decodeRgbValue(0, 0, 31);
+	unsigned int data;
 
+
+	// inicializacne funkcie
 	initSPI2();
 	initCD_Pin();
 	initCS_Pin();
 	initRES_Pin();
-	USART_init();
+	initUSART2();
+	initI2C1();
+	initADS1100();
 	//ssd1306_init();
 
 	lcdInitialise(LCD_ORIENTATION0);
@@ -65,6 +72,7 @@ int main(void){
 	lcdRectangle(45, 23, 83, 60, biela);
 
 	while(1){
+		// readDataADS1100(&data);
 		for(int i=0;i<6;i++){
 			////Mriezka pre stvorceky
 			//lcdMriezka3x3(51, 28, i+1, biela, cierna);
