@@ -65,6 +65,28 @@ void I2C1_clearReadRegister(void) {
 }
 
 
+// vygeneruje nahodne cislo pomocou ADC prevodu a RCC
+uint32_t getTrueRandomNumber(void) {
+	// citame viackrat pre vyssi sum a nahodnost
+	for (int i = 0; i < 10; i++) {
+	    // zacni AD prevod vnutornej teploty procesora
+	    ADC_SoftwareStartConv(ADC1);
+	    // ak skoncil prevod
+	    while (!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)) {}
+	    // vratime 10-tu hodnotu kontrolneho suctu
+	    if (i>=9){
+	    	ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
+	    	return CRC_CalcCRC(ADC_GetConversionValue(ADC1));
+	    }
+	    else {
+	    	ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
+	    	CRC_CalcCRC(ADC_GetConversionValue(ADC1));
+	    }
+	}
+	return 0;
+}
+
+
 // inicializacia tlacidla pre spustenie prevodu
 void initButton(void){
 	// inicializacne struktura
@@ -84,7 +106,7 @@ void initADC(void){
 	// inicializacne struktury
 	ADC_InitTypeDef ADC_InitStructure;
 
-	// zapneme RCC a HSI periferie
+	// zapneme RCC a PLL periferie
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	RCC_SYSCLKConfig(RCC_SYSCLKSource_HSI);
 	RCC_HSICmd(ENABLE);
@@ -100,12 +122,12 @@ void initADC(void){
 	ADC_Init(ADC1, &ADC_InitStructure);
 	// povolime vnutorny kanal pre citanie teploty procesora
 	ADC_TempSensorVrefintCmd(ENABLE);
+	// zapneme AD prevodnik
+	ADC_Cmd(ADC1, ENABLE);
 	// prevadzame pri najvyssej rychlosti aby sme vygenerovali najvyssi sum
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_16,1,ADC_SampleTime_4Cycles);
 	// povolime hodiny pre RCC
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
-	// zapneme AD prevodnik
-	ADC_Cmd(ADC1, ENABLE);
 }
 
 
@@ -234,9 +256,9 @@ void initUSART2(void){
 	USART_InitTypeDef USART_InitStructure;
 	// konfiguracia USART
 	USART_InitStructure.USART_BaudRate = 2*9600;	// 2x kvoli kniznici
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_WordLength = USART_WordLength_9b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
-	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_Parity = USART_Parity_Even;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	USART_Init(USART2, &USART_InitStructure);

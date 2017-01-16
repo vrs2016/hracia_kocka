@@ -84,10 +84,8 @@ int main(void){
 	//uint16_t cervena = decodeRgbValue(31, 0, 0);
 	uint16_t zelena = decodeRgbValue(0, 31, 0);
 	//uint16_t modra = decodeRgbValue(0, 0, 31);
-	uint16_t prevod = 0;
 	char error = 0;
 	MPU6050_t MPU6050_Data;
-	char str[120];
 
 	// inicializacne funkcie
 	initSPI2();
@@ -96,11 +94,10 @@ int main(void){
 	initRES_Pin();
 	initButton();
 	initADC();
-	initUSART2();
+	//initUSART2();
 	initI2C1();
 	error = initMPU6050(&MPU6050_Data,MPU6050_Zariadenie_0,MPU6050_Akcelerometer_2G,MPU6050_Gyroskop_250s);
 	if(error!=0){
-		sendUSART2("Nastala chyba pri inicializacii MPU6050 !\n\r");
 		return error;
 	}
 	lcdInitialise(LCD_ORIENTATION0);
@@ -119,26 +116,16 @@ int main(void){
 	//nahodny generator
 	lcdPutS("Elektronicka hracia kocka", lcdTextX(1), lcdTextY(1), biela, cierna);
 	lcdRectangle(45, 23, 83, 60, biela);
+	uint32_t xxx = getTrueRandomNumber();
+	xxx = getTrueRandomNumber();
+	xxx = getTrueRandomNumber();
 
 	while(1){
 		MPU6050_readAcc((int16_t*)&data, &MPU6050_Data);
-		sprintf(str, "Akcelerometer\n\r- X:%d\n\r- Y:%d\n\r- Z:%d\n\r- Strana:%d\n\r",
-				MPU6050_Data.Akcelerometer_X,
-		        MPU6050_Data.Akcelerometer_Y,
-		        MPU6050_Data.Akcelerometer_Z,
-				diceSide(&MPU6050_Data));
-		sendUSART2(str);
 		////Mriezka pre stvorceky
 		//lcdMriezka3x3(51, 28, i+1, biela, cierna);
 		//Mriezka pre kruzky
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
-
-		// spustime ADC prevod
-		ADC_SoftwareStartConv(ADC1);
-		// pockame kym skonci prevod
-		while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)){}
-		// nacitame si hodnotu z prevodnika
-		prevod = ADC_GetConversionValue(ADC1);
 	}
 	return 0;
 }

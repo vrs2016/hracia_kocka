@@ -27,6 +27,8 @@ void I2C1_DMA_Read(uint8_t slaveAddr, uint8_t readAddr,uint8_t numberBytesReceiv
 char diceSide(MPU6050_t* Sensor);
 // funkcia na inicializaciu I2C
 void initI2C1(void);
+// vygeneruje nahodne cislo pomocou ADC prevodu a RCC
+uint32_t getTrueRandomNumber(void);
 // inicializacia ADC prevodnika
 void initADC(void);
 // inicializacia tlacidla pre spustenie prevodu
