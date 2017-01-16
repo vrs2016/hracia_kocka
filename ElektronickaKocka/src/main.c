@@ -125,20 +125,10 @@ int main(void){
 		        MPU6050_Data.Akcelerometer_Z,
 				diceSide(&MPU6050_Data));
 		sendUSART2(str);
-		//Delay(50);
-
-		for(int i=0;i<6;i++){
-			////Mriezka pre stvorceky
-			//lcdMriezka3x3(51, 28, i+1, biela, cierna);
-
-			//Mriezka pre kruzky
-			lcdMriezka3x3(54, 31, i+1, biela, cierna);
-			for(int j=0;j<150;j++){
-				//Delay(1000);
-				// pomocna funkcia na zobrazenie informacii odoslanim na seriovu linku
-				//sendUSART2("Test\n\r");
-			}
-		}
+		////Mriezka pre stvorceky
+		//lcdMriezka3x3(51, 28, i+1, biela, cierna);
+		//Mriezka pre kruzky
+		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
 	}
 	return 0;
 }
