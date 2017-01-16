@@ -18,3 +18,5 @@
 
 ##Schema zapojenia
 ![alt tag](https://github.com/vrs2016/hracia_kocka/blob/master/schema.png)
+
+© Copyright ggfz
