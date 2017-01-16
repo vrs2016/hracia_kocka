@@ -79,6 +79,36 @@ void initButton(void){
 }
 
 
+// inicializacia ADC prevodnika
+void initADC(void){
+	// inicializacne struktury
+	ADC_InitTypeDef ADC_InitStructure;
+
+	// zapneme RCC a HSI periferie
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	RCC_SYSCLKConfig(RCC_SYSCLKSource_HSI);
+	RCC_HSICmd(ENABLE);
+	while (!RCC_GetFlagStatus(RCC_FLAG_HSIRDY));
+
+	ADC_DeInit(ADC1);
+	ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+	ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+	ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
+	ADC_InitStructure.ADC_NbrOfConversion = 1;
+	ADC_Init(ADC1, &ADC_InitStructure);
+	// povolime vnutorny kanal pre citanie teploty procesora
+	ADC_TempSensorVrefintCmd(ENABLE);
+	// prevadzame pri najvyssej rychlosti aby sme vygenerovali najvyssi sum
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_16,1,ADC_SampleTime_4Cycles);
+	// povolime hodiny pre RCC
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
+	// zapneme AD prevodnik
+	ADC_Cmd(ADC1, ENABLE);
+}
+
+
 // inicializacia pre I2C zbernicu
 void initI2C1(void) {
 	GPIO_InitTypeDef GPIO_InitStructure;

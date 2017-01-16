@@ -95,6 +95,7 @@ int main(void){
 	initCS_Pin();
 	initRES_Pin();
 	initButton();
+	initADC();
 	initUSART2();
 	initI2C1();
 	error = initMPU6050(&MPU6050_Data,MPU6050_Zariadenie_0,MPU6050_Akcelerometer_2G,MPU6050_Gyroskop_250s);
@@ -131,14 +132,13 @@ int main(void){
 		//lcdMriezka3x3(51, 28, i+1, biela, cierna);
 		//Mriezka pre kruzky
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
-		/*
+
 		// spustime ADC prevod
 		ADC_SoftwareStartConv(ADC1);
 		// pockame kym skonci prevod
 		while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)){}
 		// nacitame si hodnotu z prevodnika
 		prevod = ADC_GetConversionValue(ADC1);
-		*/
 	}
 	return 0;
 }
