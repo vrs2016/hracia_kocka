@@ -15,7 +15,7 @@
 5. Prepojovacie kable
 
 ###Pouzivatelska a programatorska dokumentacia
-![tag](https://github.com/vrs2016/hracia_kocka/blob/master/Pouzivatelska_dokumentacia.pdf)
+[Pouzivatelska dokumentacia](https://github.com/vrs2016/hracia_kocka/blob/master/Pouzivatelska_dokumentacia.pdf)
 
 ##Schema zapojenia
 ![alt tag](https://github.com/vrs2016/hracia_kocka/blob/master/schema.png)
