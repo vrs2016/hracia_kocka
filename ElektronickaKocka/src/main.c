@@ -132,6 +132,11 @@ int main(void){
 			FLAG = 0;
 		}
 		else{
+			// ak sme prudko pohli senzorom
+			if((MPU6050_Data.Akcelerometer_X>30000)||(MPU6050_Data.Akcelerometer_Y>30000)
+					||(MPU6050_Data.Akcelerometer_Z>30000)){
+				FLAG = 1;
+			}
 			// osetrenie zakmitov pri stlaceni tlacidla
 			for (int i = 0;i<condition_count;i++){
 				  //ak je stlacene tlacidlo PC13
