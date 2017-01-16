@@ -104,7 +104,7 @@ int main(void){
 	}
 	lcdInitialise(LCD_ORIENTATION0);
 	clearDisplay(cierna);
-	lcdMriezka3x3(54, 93, 6, biela, cierna);
+	lcdMriezka3x3(54, 93, 6, zelena, cierna);
 
 	//hod kockou na zaklade akcelerometra
 	lcdPutS("Nahodny generator", lcdTextX(1), lcdTextY(9), biela, cierna);
@@ -122,30 +122,38 @@ int main(void){
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
 		// mriezka pre nahodny generator
 		if(FLAG){
-			lcdMriezka3x3(54, 93, getTrueRandomNumber(), zelena, cierna);
+			for(int i=0;i<50;i++){
+				lcdMriezka3x3(54, 93, getTrueRandomNumber(), zelena, cierna);
+				Delay(50*i);
+				MPU6050_readAcc((int16_t*)&data, &MPU6050_Data);
+				lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
+				Delay(50*i);
+			}
 			FLAG = 0;
 		}
-		// osetrenie zakmitov pri stlaceni tlacidla
-		for (int i = 0;i<condition_count;i++){
-			  //ak je stlacene tlacidlo PC13
-			  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 0) {
-				  push_count++;
-				  if (push_count>condition_count){
-					BUTTON = 1;
-					push_count = 0;
-				  }
-			  }
-			  if (BUTTON == 1){
-				  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) != 0){
-					  push_count2++;
-					  if (push_count2>condition_count){
-						  BUTTON = 0;
-						  // stlacene tlacidlo
-						  FLAG = 1;
-						  push_count2 = 0;
+		else{
+			// osetrenie zakmitov pri stlaceni tlacidla
+			for (int i = 0;i<condition_count;i++){
+				  //ak je stlacene tlacidlo PC13
+				  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 0) {
+					  push_count++;
+					  if (push_count>condition_count){
+						BUTTON = 1;
+						push_count = 0;
 					  }
 				  }
-			  }
+				  if (BUTTON == 1){
+					  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) != 0){
+						  push_count2++;
+						  if (push_count2>condition_count){
+							  BUTTON = 0;
+							  // stlacene tlacidlo
+							  FLAG = 1;
+							  push_count2 = 0;
+						  }
+					  }
+				  }
+			}
 		}
 
 	}
