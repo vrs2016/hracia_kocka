@@ -4,8 +4,8 @@
 
 ##Postup spustenia:
 1. Stiahni alebo naklonuj repozitar
-2. Skopiruj subory do Attolic workspace
-3. Skompiluj na STM NUCLEO L152RE
+2. Skopiruj subory do Atollic workspace
+3. Skompiluj na STM32 NUCLEO L152RE
 
 ##Potrebny hardware
 1. STM NUCLEO L152RE
