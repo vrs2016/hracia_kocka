@@ -203,27 +203,27 @@ void initUSART2(void){
 char diceSide(MPU6050_t* Sensor){
 	if ( (Sensor->Akcelerometer_X > 10000) && (Sensor->Akcelerometer_Y < 10000)
 			&& (Sensor->Akcelerometer_Z < 10000) ){
-		return 1;
+		return 4;
 	}
 	else if( (Sensor->Akcelerometer_X < -10000) && (Sensor->Akcelerometer_Y > -10000)
 			&& (Sensor->Akcelerometer_Z > -10000) ){
-		return 2;
+		return 3;
 	}
 	else if( (Sensor->Akcelerometer_Y > 10000) && (Sensor->Akcelerometer_X < 10000)
 			&& (Sensor->Akcelerometer_Z < 10000) ){
-		return 3;
+		return 5;
 	}
 	else if( (Sensor->Akcelerometer_Y < -10000) && (Sensor->Akcelerometer_X > -10000)
 			&& (Sensor->Akcelerometer_Z > -10000) ){
-		return 4;
+		return 2;
 	}
 	else if( (Sensor->Akcelerometer_Z > 10000) && (Sensor->Akcelerometer_X < 10000)
 			&& (Sensor->Akcelerometer_Y < 10000) ){
-		return 5;
+		return 6;
 	}
 	else if( (Sensor->Akcelerometer_Z < -10000) && (Sensor->Akcelerometer_X > -10000)
 			&& (Sensor->Akcelerometer_Y > -10000) ){
-		return 6;
+		return 1;
 	}
 	else{
 		return -1;

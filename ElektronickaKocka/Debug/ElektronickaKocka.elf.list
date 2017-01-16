@@ -4388,8 +4388,8 @@ char diceSide(MPU6050_t* Sensor){
  80018ce:	f242 720f 	movw	r2, #9999	; 0x270f
  80018d2:	4293      	cmp	r3, r2
  80018d4:	dc01      	bgt.n	80018da <diceSide+0x36>
-		return 1;
- 80018d6:	2301      	movs	r3, #1
+		return 4;
+ 80018d6:	2304      	movs	r3, #4
  80018d8:	e06a      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else if( (Sensor->Akcelerometer_X < -10000) && (Sensor->Akcelerometer_Y > -10000)
@@ -4409,8 +4409,8 @@ char diceSide(MPU6050_t* Sensor){
  80018f8:	4a31      	ldr	r2, [pc, #196]	; (80019c0 <diceSide+0x11c>)
  80018fa:	4293      	cmp	r3, r2
  80018fc:	db01      	blt.n	8001902 <diceSide+0x5e>
-		return 2;
- 80018fe:	2302      	movs	r3, #2
+		return 3;
+ 80018fe:	2303      	movs	r3, #3
  8001900:	e056      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else if( (Sensor->Akcelerometer_Y > 10000) && (Sensor->Akcelerometer_X < 10000)
@@ -4430,8 +4430,8 @@ char diceSide(MPU6050_t* Sensor){
  8001924:	f242 720f 	movw	r2, #9999	; 0x270f
  8001928:	4293      	cmp	r3, r2
  800192a:	dc01      	bgt.n	8001930 <diceSide+0x8c>
-		return 3;
- 800192c:	2303      	movs	r3, #3
+		return 5;
+ 800192c:	2305      	movs	r3, #5
  800192e:	e03f      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else if( (Sensor->Akcelerometer_Y < -10000) && (Sensor->Akcelerometer_X > -10000)
@@ -4451,8 +4451,8 @@ char diceSide(MPU6050_t* Sensor){
  800194e:	4a1c      	ldr	r2, [pc, #112]	; (80019c0 <diceSide+0x11c>)
  8001950:	4293      	cmp	r3, r2
  8001952:	db01      	blt.n	8001958 <diceSide+0xb4>
-		return 4;
- 8001954:	2304      	movs	r3, #4
+		return 2;
+ 8001954:	2302      	movs	r3, #2
  8001956:	e02b      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else if( (Sensor->Akcelerometer_Z > 10000) && (Sensor->Akcelerometer_X < 10000)
@@ -4472,8 +4472,8 @@ char diceSide(MPU6050_t* Sensor){
  800197a:	f242 720f 	movw	r2, #9999	; 0x270f
  800197e:	4293      	cmp	r3, r2
  8001980:	dc01      	bgt.n	8001986 <diceSide+0xe2>
-		return 5;
- 8001982:	2305      	movs	r3, #5
+		return 6;
+ 8001982:	2306      	movs	r3, #6
  8001984:	e014      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else if( (Sensor->Akcelerometer_Z < -10000) && (Sensor->Akcelerometer_X > -10000)
@@ -4493,8 +4493,8 @@ char diceSide(MPU6050_t* Sensor){
  80019a4:	4a06      	ldr	r2, [pc, #24]	; (80019c0 <diceSide+0x11c>)
  80019a6:	4293      	cmp	r3, r2
  80019a8:	db01      	blt.n	80019ae <diceSide+0x10a>
-		return 6;
- 80019aa:	2306      	movs	r3, #6
+		return 1;
+ 80019aa:	2301      	movs	r3, #1
  80019ac:	e000      	b.n	80019b0 <diceSide+0x10c>
 	}
 	else{
