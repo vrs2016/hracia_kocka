@@ -26,12 +26,13 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "mpu6050.h"
 #include "stm32l1xx.h"
 #include "spi.h"
 #include "ssd1306.h"
 #include "ili9163.h"
 #include "elkocka.h"
-#include "mpu6050.h"
+
 
 volatile int16_t data[14], test;
 
@@ -118,12 +119,13 @@ int main(void){
 
 	while(1){
 		MPU6050_readAcc((int16_t*)&data, &MPU6050_Data);
-		sprintf(str, "Akcelerometer\n\r- X:%d\n\r- Y:%d\n\r- Z:%d\n\r",
+		sprintf(str, "Akcelerometer\n\r- X:%d\n\r- Y:%d\n\r- Z:%d\n\r- Strana:%d\n\r",
 				MPU6050_Data.Akcelerometer_X,
 		        MPU6050_Data.Akcelerometer_Y,
-		        MPU6050_Data.Akcelerometer_Z);
+		        MPU6050_Data.Akcelerometer_Z,
+				diceSide(&MPU6050_Data));
 		sendUSART2(str);
-		Delay(50);
+		//Delay(50);
 
 		for(int i=0;i<6;i++){
 			////Mriezka pre stvorceky
@@ -132,7 +134,7 @@ int main(void){
 			//Mriezka pre kruzky
 			lcdMriezka3x3(54, 31, i+1, biela, cierna);
 			for(int j=0;j<150;j++){
-				Delay(1000);
+				//Delay(1000);
 				// pomocna funkcia na zobrazenie informacii odoslanim na seriovu linku
 				//sendUSART2("Test\n\r");
 			}

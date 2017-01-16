@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stddef.h>
 #include "stm32l1xx.h"
+#include "mpu6050.h"
 #include "ili9163.h"
 #include "stm32l1xx.h"
 #include "stm32l1xx_conf.h"
@@ -96,18 +97,6 @@ void initI2C1(void) {
 	I2C1_initDMA();
 }
 
-/*
-void MPU6050_I2C_ByteWrite(uint8_t slaveAddr, uint8_t* pBuffer, uint8_t writeAddr){
-	I2C_GenerateSTART(I2C1, ENABLE);
-	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
-	I2C_Send7bitAddress(I2C1, slaveAddr, I2C_Direction_Transmitter);
-	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
-	I2C_SendData(I2C1, writeAddr);
-	if (pBuffer!=0) I2C_SendData(I2C1, (uint8_t)&pBuffer);
-	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-	I2C_GenerateSTOP(I2C1, ENABLE);
-}
-*/
 
 void I2C1_BytesWrite(uint8_t slaveAddr, uint8_t pBuffer[], uint8_t length,uint8_t writeAddr) {
 	while (deviceAddrUseI2c != 0);
@@ -125,15 +114,6 @@ void I2C1_BytesWrite(uint8_t slaveAddr, uint8_t pBuffer[], uint8_t length,uint8_
 	I2C_GenerateSTOP(I2C1, ENABLE);
 	I2C1_clearReadRegister();
 	I2C1_clearDeviceAddress();
-}
-
-
-void MPU6050_Write(uint8_t slaveAddr, uint8_t regAddr, uint8_t data){
-    uint8_t tmp;
-
-    tmp = data;
-    I2C1_BytesWrite(slaveAddr,&tmp,1,regAddr);
-    //MPU6050_I2C_ByteWrite(slaveAddr,&tmp,regAddr);
 }
 
 
@@ -219,6 +199,36 @@ void initUSART2(void){
 	USART_Cmd(USART2, ENABLE);
 }
 
+// na zaklade akcelerometra zistime stranu kocky
+char diceSide(MPU6050_t* Sensor){
+	if ( (Sensor->Akcelerometer_X > 10000) && (Sensor->Akcelerometer_Y < 10000)
+			&& (Sensor->Akcelerometer_Z < 10000) ){
+		return 1;
+	}
+	else if( (Sensor->Akcelerometer_X < -10000) && (Sensor->Akcelerometer_Y > -10000)
+			&& (Sensor->Akcelerometer_Z > -10000) ){
+		return 2;
+	}
+	else if( (Sensor->Akcelerometer_Y > 10000) && (Sensor->Akcelerometer_X < 10000)
+			&& (Sensor->Akcelerometer_Z < 10000) ){
+		return 3;
+	}
+	else if( (Sensor->Akcelerometer_Y < -10000) && (Sensor->Akcelerometer_X > -10000)
+			&& (Sensor->Akcelerometer_Z > -10000) ){
+		return 4;
+	}
+	else if( (Sensor->Akcelerometer_Z > 10000) && (Sensor->Akcelerometer_X < 10000)
+			&& (Sensor->Akcelerometer_Y < 10000) ){
+		return 5;
+	}
+	else if( (Sensor->Akcelerometer_Z < -10000) && (Sensor->Akcelerometer_X > -10000)
+			&& (Sensor->Akcelerometer_Y > -10000) ){
+		return 6;
+	}
+	else{
+		return -1;
+	}
+}
 
 // posli string po seriovej zbernici USART2
 void sendUSART2(char *s){

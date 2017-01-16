@@ -90,7 +90,15 @@ char initMPU6050(MPU6050_t* Data, MPU6050_Zariadenie_t DeviceNumber, MPU6050_Akc
 		default:
 			break;
 	}
-
+	/*
+	// nakonfigurujeme externe prerusenie
+	temp = 1<<4;
+	// vlajky prerusenia sa znuluju po kazdom citani
+	I2C1_BytesWrite(MPU6050_I2C_ADDR,&temp,1,MPU6050_INT_PIN_CFG);
+	temp = 1<<0;
+	// prerusenie nastane, ked su data pripravene na citanie
+	I2C1_BytesWrite(MPU6050_I2C_ADDR,&temp,1,MPU6050_INT_ENABLE);
+	*/
 	// ak je vsetko v poriadku
 	return error;
 }
