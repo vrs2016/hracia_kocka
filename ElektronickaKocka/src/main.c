@@ -107,25 +107,19 @@ int main(void){
 	//hod kockou na zaklade akcelerometra
 	lcdPutS("Nahodny generator", lcdTextX(1), lcdTextY(9), biela, cierna);
 	lcdRectangle(45, 85, 83, 122, biela);
-	////Mriezka pre stvorceky
-	//lcdMriezka3x3(51, 90, 3, zelena, cierna);
-
-	//Mriezka pre kruzky
-	lcdMriezka3x3(54, 93, 6, zelena, cierna);
 
 	//nahodny generator
 	lcdPutS("Elektronicka hracia kocka", lcdTextX(1), lcdTextY(1), biela, cierna);
 	lcdRectangle(45, 23, 83, 60, biela);
-	uint32_t xxx = getTrueRandomNumber();
-	xxx = getTrueRandomNumber();
-	xxx = getTrueRandomNumber();
 
 	while(1){
 		MPU6050_readAcc((int16_t*)&data, &MPU6050_Data);
-		////Mriezka pre stvorceky
-		//lcdMriezka3x3(51, 28, i+1, biela, cierna);
-		//Mriezka pre kruzky
+		// mriezka pre stvorceky
+		// lcdMriezka3x3(51, 28, 1, biela, cierna);
+		// mriezka pre elektronicku kocku
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
+		// mriezka pre nahodny generator
+		lcdMriezka3x3(54, 93, getTrueRandomNumber(), zelena, cierna);
 	}
 	return 0;
 }

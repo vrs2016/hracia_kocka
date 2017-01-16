@@ -65,8 +65,8 @@ void I2C1_clearReadRegister(void) {
 }
 
 
-// vygeneruje nahodne cislo pomocou ADC prevodu a RCC
-uint32_t getTrueRandomNumber(void) {
+// vygeneruje nahodne cislo pomocou ADC prevodu a CRC
+uint8_t getTrueRandomNumber(void) {
 	// citame viackrat pre vyssi sum a nahodnost
 	for (int i = 0; i < 10; i++) {
 	    // zacni AD prevod vnutornej teploty procesora
@@ -76,7 +76,8 @@ uint32_t getTrueRandomNumber(void) {
 	    // vratime 10-tu hodnotu kontrolneho suctu
 	    if (i>=9){
 	    	ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
-	    	return CRC_CalcCRC(ADC_GetConversionValue(ADC1));
+	    	// konvertujeme na cislo z rozsahu 1-6
+	    	return (CRC_CalcCRC(ADC_GetConversionValue(ADC1))%6 + 1);
 	    }
 	    else {
 	    	ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
