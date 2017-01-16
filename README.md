@@ -16,6 +16,7 @@
 
 ###Pouzivatelska a programatorska dokumentacia
 [Pouzivatelska dokumentacia](https://github.com/vrs2016/hracia_kocka/blob/master/Pouzivatelska_dokumentacia.pdf)
+
 [Programatorska dokumentacia](https://github.com/vrs2016/hracia_kocka/blob/master/Programatorska_dokumentacia.pdf)
 
 ##Schema zapojenia
