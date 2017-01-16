@@ -86,6 +86,8 @@ int main(void){
 	//uint16_t modra = decodeRgbValue(0, 0, 31);
 	char error = 0;
 	MPU6050_t MPU6050_Data;
+	uint8_t BUTTON = 0, FLAG = 0;
+	uint8_t push_count = 0,push_count2 = 0, condition_count = 3;
 
 	// inicializacne funkcie
 	initSPI2();
@@ -119,7 +121,33 @@ int main(void){
 		// mriezka pre elektronicku kocku
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
 		// mriezka pre nahodny generator
-		lcdMriezka3x3(54, 93, getTrueRandomNumber(), zelena, cierna);
+		if(FLAG){
+			lcdMriezka3x3(54, 93, getTrueRandomNumber(), zelena, cierna);
+			FLAG = 0;
+		}
+		// osetrenie zakmitov pri stlaceni tlacidla
+		for (int i = 0;i<condition_count;i++){
+			  //ak je stlacene tlacidlo PC13
+			  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 0) {
+				  push_count++;
+				  if (push_count>condition_count){
+					BUTTON = 1;
+					push_count = 0;
+				  }
+			  }
+			  if (BUTTON == 1){
+				  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) != 0){
+					  push_count2++;
+					  if (push_count2>condition_count){
+						  BUTTON = 0;
+						  // stlacene tlacidlo
+						  FLAG = 1;
+						  push_count2 = 0;
+					  }
+				  }
+			  }
+		}
+
 	}
 	return 0;
 }
