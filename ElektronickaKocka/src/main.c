@@ -31,9 +31,50 @@
 #include "ssd1306.h"
 #include "ili9163.h"
 #include "elkocka.h"
-#include "ads1100.h"
-#include "i2c.h"
 #include "mpu6050.h"
+
+volatile int16_t data[14], test;
+
+// prerusenie od MPU6050 pre DMA pristup
+void DMA1_Channel7_IRQHandler(void) {
+	// ak nastalo prerusenie
+	if (DMA_GetFlagStatus(DMA1_FLAG_TC7)) {
+		// vynulujeme vlajku prerusenia
+		DMA_ClearFlag(DMA1_FLAG_TC7);
+		// vypneme DMA prenos
+		I2C_DMACmd(I2C1, DISABLE);
+		// vygenerujeme koniec prenosu
+		I2C_GenerateSTOP(I2C1, ENABLE);
+		// vypneme DMA kanal
+		DMA_Cmd(DMA1_Channel7, DISABLE);
+
+		if(I2C1_getReadRegister() == MPU6050_WHO_AM_I) {
+			test = (int16_t) I2C1_getRxBuffer(0);
+		}
+		// nacitame data do struktury
+		if(I2C1_getReadRegister() == MPU6050_ACCEL_XOUT_H){
+			data[0] = (int16_t) I2C1_getRxBuffer(0);
+		}
+		else if(I2C1_getReadRegister() == MPU6050_ACCEL_XOUT_L){
+			data[1] = (int16_t) I2C1_getRxBuffer(0);
+		}
+		else if(I2C1_getReadRegister() == MPU6050_ACCEL_YOUT_H){
+			data[2] = (int16_t) I2C1_getRxBuffer(0);
+		}
+		else if(I2C1_getReadRegister() == MPU6050_ACCEL_YOUT_L){
+			data[3] = (int16_t) I2C1_getRxBuffer(0);
+		}
+		else if(I2C1_getReadRegister() == MPU6050_ACCEL_ZOUT_H){
+			data[4] = (int16_t) I2C1_getRxBuffer(0);
+		}
+		else if(I2C1_getReadRegister() == MPU6050_ACCEL_ZOUT_L){
+			data[5] = (int16_t) I2C1_getRxBuffer(0);
+		}
+
+		I2C1_clearReadRegister();
+		I2C1_clearDeviceAddress();
+	}
+}
 
 
 int main(void){
@@ -42,8 +83,9 @@ int main(void){
 	//uint16_t cervena = decodeRgbValue(31, 0, 0);
 	uint16_t zelena = decodeRgbValue(0, 31, 0);
 	//uint16_t modra = decodeRgbValue(0, 0, 31);
-	unsigned int data;
-
+	char error = 0;
+	MPU6050_t MPU6050_Data;
+	char str[120];
 
 	// inicializacne funkcie
 	initSPI2();
@@ -52,9 +94,11 @@ int main(void){
 	initRES_Pin();
 	initUSART2();
 	initI2C1();
-	initADS1100();
-	//ssd1306_init();
-
+	error = initMPU6050(&MPU6050_Data,MPU6050_Zariadenie_0,MPU6050_Akcelerometer_2G,MPU6050_Gyroskop_250s);
+	if(error!=0){
+		sendUSART2("Nastala chyba pri inicializacii MPU6050 !\n\r");
+		return error;
+	}
 	lcdInitialise(LCD_ORIENTATION0);
 	clearDisplay(cierna);
 	lcdMriezka3x3(54, 93, 6, biela, cierna);
@@ -73,7 +117,14 @@ int main(void){
 	lcdRectangle(45, 23, 83, 60, biela);
 
 	while(1){
-		// readDataADS1100(&data);
+		MPU6050_readAcc((int16_t*)&data, &MPU6050_Data);
+		sprintf(str, "Akcelerometer\n\r- X:%d\n\r- Y:%d\n\r- Z:%d\n\r",
+				MPU6050_Data.Akcelerometer_X,
+		        MPU6050_Data.Akcelerometer_Y,
+		        MPU6050_Data.Akcelerometer_Z);
+		sendUSART2(str);
+		Delay(50);
+
 		for(int i=0;i<6;i++){
 			////Mriezka pre stvorceky
 			//lcdMriezka3x3(51, 28, i+1, biela, cierna);
@@ -83,9 +134,10 @@ int main(void){
 			for(int j=0;j<150;j++){
 				Delay(1000);
 				// pomocna funkcia na zobrazenie informacii odoslanim na seriovu linku
-				sendUSART2("Test\n\r");
+				//sendUSART2("Test\n\r");
 			}
 		}
 	}
 	return 0;
 }
+

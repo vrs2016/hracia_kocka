@@ -41,6 +41,43 @@
 #define MPU6050_FIFO_COUNTL			0x73
 #define MPU6050_FIFO_R_W			0x74
 #define MPU6050_WHO_AM_I			0x75
+#define MPU6050_CLOCK_INTERNAL          0x00
+#define MPU6050_CLOCK_PLL_XGYRO         0x01
+#define MPU6050_CLOCK_PLL_YGYRO         0x02
+#define MPU6050_CLOCK_PLL_ZGYRO         0x03
+#define MPU6050_CLOCK_PLL_EXT32K        0x04
+#define MPU6050_CLOCK_PLL_EXT19M        0x05
+#define MPU6050_CLOCK_KEEP_RESET        0x07
+#define MPU6050_GYRO_FS_250         0x00<<3
+#define MPU6050_GYRO_FS_500         0x01<<3
+#define MPU6050_GYRO_FS_1000        0x02<<3
+#define MPU6050_GYRO_FS_2000        0x03<<3
+#define MPU6050_ACCEL_FS_2          0x00<<3
+#define MPU6050_ACCEL_FS_4          0x01<<3
+#define MPU6050_ACCEL_FS_8          0x02<<3
+#define MPU6050_ACCEL_FS_16         0x03<<3
+#define MPU6050_DHPF_RESET          0x00
+#define MPU6050_DHPF_5              0x01
+#define MPU6050_DHPF_2P5            0x02
+#define MPU6050_DHPF_1P25           0x03
+#define MPU6050_DHPF_0P63           0x04
+#define MPU6050_DHPF_HOLD           0x07
+#define MPU6050_CLOCK_DIV_348       0x0
+#define MPU6050_CLOCK_DIV_333       0x1
+#define MPU6050_CLOCK_DIV_320       0x2
+#define MPU6050_CLOCK_DIV_308       0x3
+#define MPU6050_CLOCK_DIV_296       0x4
+#define MPU6050_CLOCK_DIV_286       0x5
+#define MPU6050_CLOCK_DIV_276       0x6
+#define MPU6050_CLOCK_DIV_267       0x7
+#define MPU6050_CLOCK_DIV_258       0x8
+#define MPU6050_CLOCK_DIV_500       0x9
+#define MPU6050_CLOCK_DIV_471       0xA
+#define MPU6050_CLOCK_DIV_444       0xB
+#define MPU6050_CLOCK_DIV_421       0xC
+#define MPU6050_CLOCK_DIV_400       0xD
+#define MPU6050_CLOCK_DIV_381       0xE
+#define MPU6050_CLOCK_DIV_364       0xF
 
 /* Citlivosti gyroskopu v °/s */
 #define MPU6050_GYRO_SENS_250		((float) 131)
@@ -97,38 +134,9 @@ typedef struct {
 } MPU6050_t;
 
 // inicializuje MPU6050 pred prvym pouzitimi a nastavi pozadovane citlivosti akcelerometra a gyroskopu
-Status initMPU6050(MPU6050_t* Data, MPU6050_Zariadenie_t DeviceNumber, MPU6050_Akcelerometer_t citlivostA, MPU6050_Gyroskop_t citlivostG);
+char initMPU6050(MPU6050_t* Data, MPU6050_Zariadenie_t DeviceNumber, MPU6050_Akcelerometer_t citlivostA, MPU6050_Gyroskop_t citlivostG);
 
-// nacita udaje z akcelerometra
-/* VSTUPY */
-// - *Data : pointer na MPU6050_t strukturu na ulozenie nacitanych udajov
-/* NAVRATOVA HODNOTA */
-// - MPU6050_Result_Ok : vsetko v poriadku
-// - Ina : v pripade chyby
-char nacitajMPU6050_Akcelerometer(MPU6050_t* Data);
-
-// nacita udaje z gyroskopu
-/* VSTUPY */
-// - *Data : pointer na MPU6050_t strukturu na ulozenie nacitanych udajov
-/* NAVRATOVA HODNOTA */
-// - MPU6050_Result_Ok : vsetko v poriadku
-// - Ina : v pripade chyby
-char nacitajMPU6050_Gyroskop(MPU6050_t* Data);
-
-// nacita udaje z teplotneho senzora
-/* VSTUPY */
-// - *Data : pointer na MPU6050_t strukturu na ulozenie nacitanych udajov
-/* NAVRATOVA HODNOTA */
-// - MPU6050_Result_Ok : vsetko v poriadku
-// - Ina : v pripade chyby
-char nacitajMPU6050_Teplotu(MPU6050_t* Data);
-
-// nacita udaje z akcelerometra, gyroskopu a teplotneho senzora
-/* VSTUPY */
-// - *Data : pointer na MPU6050_t strukturu na ulozenie nacitanych udajov
-/* NAVRATOVA HODNOTA */
-// - MPU6050_Result_Ok : vsetko v poriadku
-// - Ina : v pripade chyby
-char nacitajMPU6050_Vsetko(MPU6050_t* Data);
+// nacitame hodnoty akcelerometra
+void MPU6050_readAcc(int16_t* data, MPU6050_t* Sensor);
 
 #endif /* MPU6050_H_ */
