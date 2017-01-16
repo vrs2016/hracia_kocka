@@ -84,6 +84,7 @@ int main(void){
 	//uint16_t cervena = decodeRgbValue(31, 0, 0);
 	uint16_t zelena = decodeRgbValue(0, 31, 0);
 	//uint16_t modra = decodeRgbValue(0, 0, 31);
+	uint16_t prevod = 0;
 	char error = 0;
 	MPU6050_t MPU6050_Data;
 	char str[120];
@@ -93,6 +94,7 @@ int main(void){
 	initCD_Pin();
 	initCS_Pin();
 	initRES_Pin();
+	initButton();
 	initUSART2();
 	initI2C1();
 	error = initMPU6050(&MPU6050_Data,MPU6050_Zariadenie_0,MPU6050_Akcelerometer_2G,MPU6050_Gyroskop_250s);
@@ -105,7 +107,7 @@ int main(void){
 	lcdMriezka3x3(54, 93, 6, biela, cierna);
 
 	//hod kockou na zaklade akcelerometra
-	lcdPutS("Hod kockou", lcdTextX(1), lcdTextY(9), biela, cierna);
+	lcdPutS("Nahodny generator", lcdTextX(1), lcdTextY(9), biela, cierna);
 	lcdRectangle(45, 85, 83, 122, biela);
 	////Mriezka pre stvorceky
 	//lcdMriezka3x3(51, 90, 3, zelena, cierna);
@@ -114,7 +116,7 @@ int main(void){
 	lcdMriezka3x3(54, 93, 6, zelena, cierna);
 
 	//nahodny generator
-	lcdPutS("Nahodny generator", lcdTextX(1), lcdTextY(1), biela, cierna);
+	lcdPutS("Elektronicka hracia kocka", lcdTextX(1), lcdTextY(1), biela, cierna);
 	lcdRectangle(45, 23, 83, 60, biela);
 
 	while(1){
@@ -129,6 +131,14 @@ int main(void){
 		//lcdMriezka3x3(51, 28, i+1, biela, cierna);
 		//Mriezka pre kruzky
 		lcdMriezka3x3(54, 31, diceSide(&MPU6050_Data), biela, cierna);
+		/*
+		// spustime ADC prevod
+		ADC_SoftwareStartConv(ADC1);
+		// pockame kym skonci prevod
+		while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)){}
+		// nacitame si hodnotu z prevodnika
+		prevod = ADC_GetConversionValue(ADC1);
+		*/
 	}
 	return 0;
 }

@@ -27,6 +27,8 @@ void I2C1_DMA_Read(uint8_t slaveAddr, uint8_t readAddr,uint8_t numberBytesReceiv
 char diceSide(MPU6050_t* Sensor);
 // funkcia na inicializaciu I2C
 void initI2C1(void);
+// inicializacia tlacidla pre spustenie prevodu
+void initButton(void);
 // funkcia na inicializaciu USART
 void initUSART2(void);
 // funkcia na zapis na I2C

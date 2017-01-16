@@ -65,6 +65,20 @@ void I2C1_clearReadRegister(void) {
 }
 
 
+// inicializacia tlacidla pre spustenie prevodu
+void initButton(void){
+	// inicializacne struktura
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC,ENABLE);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOC,&GPIO_InitStructure);
+}
+
+
 // inicializacia pre I2C zbernicu
 void initI2C1(void) {
 	GPIO_InitTypeDef GPIO_InitStructure;
